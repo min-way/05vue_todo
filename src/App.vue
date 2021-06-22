@@ -27,7 +27,6 @@ export default {
   },
   created(){
     // this.todoItems.push('안녕하세요')
-    // this.todoItems.push('안녕하셈')
     for(let i=0;i<localStorage.length;i++){
       if(localStorage.key(i)!=="loglevel:webpack-dev-server"){
         this.todoItems.push(localStorage.key(i));
