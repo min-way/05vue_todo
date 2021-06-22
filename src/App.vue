@@ -1,8 +1,7 @@
 <template>
   <todoheader />
-  <todoinput />
-
-  <todolist />
+  <todoinput @addTodo="addTodo"/>
+  <todolist :todoItems="todoItems" @removeTodo="removeTodo"  />
   <todofooter />
 </template>
 
@@ -21,7 +20,32 @@ export default {
     todolist,
     todofooter,
   },
+  data(){
+    return{
+      todoItems:[]
+    }
+  },
+  created(){
+    // this.todoItems.push('안녕하세요')
+    // this.todoItems.push('안녕하셈')
+    for(let i=0;i<localStorage.length;i++){
+      if(localStorage.key(i)!=="loglevel:webpack-dev-server"){
+        this.todoItems.push(localStorage.key(i));
 
+      }
+    }
+  },
+  methods:{
+    addTodo(todoItem){
+      localStorage.setItem(todoItem,todoItem);
+      this.todoItems.push(todoItem);
+    },
+    removeTodo(todoItem,index){
+      localStorage.removeItem(todoItem);
+      this.todoItems.splice(index,1)
+    }
+    
+  }
 }
 </script>
 
